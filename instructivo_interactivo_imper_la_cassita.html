@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructivo Interactivo | Imper La Cassita</title>
+  <style>
+    :root{
+      --primary:#5b2b82;
+      --secondary:#f5b700;
+      --dark:#1f1f1f;
+      --muted:#6b6b6b;
+      --bg:#f4f4f7;
+      --card:#ffffff;
+      --success:#1f8f4d;
+      --danger:#b42318;
+      --line:#e4e4ea;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#ffffff 0%,var(--bg) 100%);
+      color:var(--dark);
+    }
+    header{
+      background:var(--primary);
+      color:#fff;
+      padding:22px 18px;
+      text-align:center;
+    }
+    header .brand{
+      font-size:14px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      opacity:.9;
+      margin-bottom:8px;
+    }
+    header h1{
+      margin:0;
+      font-size:27px;
+      line-height:1.1;
+    }
+    header p{
+      margin:10px auto 0;
+      max-width:720px;
+      font-size:15px;
+      opacity:.95;
+    }
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px;
+    }
+    .alert{
+      background:#fff7df;
+      border:1px solid #f2d079;
+      border-radius:14px;
+      padding:14px 16px;
+      margin:14px 0 18px;
+      font-size:15px;
+    }
+    .chat-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      overflow:hidden;
+    }
+    .chat-top{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .avatar{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--secondary);
+      color:var(--dark);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+    }
+    .chat-top strong{display:block;font-size:16px}
+    .chat-top span{font-size:13px;color:var(--muted)}
+    .chat-body{padding:16px}
+    .bubble{
+      background:#f0eef5;
+      border-radius:16px 16px 16px 4px;
+      padding:13px 14px;
+      margin-bottom:14px;
+      line-height:1.45;
+    }
+    .buttons{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-bottom:12px;
+    }
+    button{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:14px;
+      padding:13px 12px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      text-align:left;
+      transition:.15s;
+    }
+    button:hover{border-color:var(--primary); transform:translateY(-1px)}
+    button.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+    button.whatsapp{background:#e8f7ee;border-color:#bde8ce;color:#0f6b34}
+    #answer{
+      margin-top:14px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+    }
+    .answer-card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+    .answer-card h2{margin:0 0 10px;font-size:21px;color:var(--primary)}
+    .answer-card h3{margin:16px 0 8px;font-size:16px}
+    .answer-card p{line-height:1.5;margin:8px 0}
+    .answer-card ul{padding-left:20px;line-height:1.5}
+    .tag{
+      display:inline-block;
+      background:#eee8f5;
+      color:var(--primary);
+      padding:5px 9px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      margin:3px 4px 3px 0;
+    }
+    .calc{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    input{
+      flex:1;
+      min-width:180px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      font-size:16px;
+    }
+    .result{
+      background:#f6f6f9;
+      border-radius:12px;
+      padding:12px;
+      margin-top:10px;
+      font-weight:700;
+    }
+    .footer-actions{
+      margin-top:16px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    a.action{
+      text-decoration:none;
+      background:var(--dark);
+      color:#fff;
+      border-radius:12px;
+      padding:12px 14px;
+      font-weight:700;
+      display:inline-block;
+    }
+    a.action.secondary{background:#fff;color:var(--dark);border:1px solid var(--line)}
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:22px 12px;
+      font-size:13px;
+    }
+    @media(max-width:650px){
+      header h1{font-size:23px}
+      .buttons{grid-template-columns:1fr}
+      main{padding:12px}
+    }
+    @media print{
+      button,.footer-actions,.alert{display:none}
+      body{background:#fff}
+      .chat-card{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Cinera / Murtex</div>
+    <h1>Instructivo Interactivo<br>Imper “La Cassita”</h1>
+    <p>Guía rápida para preparar, aplicar y resolver dudas comunes antes de impermeabilizar.</p>
+  </header>
+
+  <main>
+    <div class="alert">
+      <strong>Importante:</strong> la preparación de superficie es el paso más importante. Una mala limpieza o humedad atrapada puede afectar el desempeño del producto.
+    </div>
+
+    <section class="chat-card">
+      <div class="chat-top">
+        <div class="avatar">C</div>
+        <div>
+          <strong>Asistente de aplicación</strong>
+          <span>Selecciona la duda que quieres resolver</span>
+        </div>
+      </div>
+      <div class="chat-body">
+        <div class="bubble">
+          Hola. Te puedo guiar paso a paso para aplicar Imper “La Cassita”. Elige una opción:
+        </div>
+
+        <div class="buttons">
+          <button onclick="showAnswer('preparacion')">1. Preparación de superficie</button>
+          <button onclick="showAnswer('aplicacion')">2. Aplicación correcta</button>
+          <button onclick="showAnswer('secado')">3. Tiempo de secado</button>
+          <button onclick="showAnswer('rendimiento')">4. Calcular rendimiento</button>
+          <button onclick="showAnswer('problemas')">5. Problemas frecuentes</button>
+          <button onclick="showAnswer('seguridad')">6. Precauciones</button>
+          <button class="primary" onclick="showAnswer('resumen')">Ver resumen rápido</button>
+          <button class="whatsapp" onclick="contactWhatsApp()">Contactar por WhatsApp</button>
+        </div>
+
+        <div id="answer"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Esta guía es informativa. Consulta siempre la etiqueta, ficha técnica y hoja de seguridad vigente del producto.
+  </footer>
+
+  <script>
+    const data = {
+      preparacion: `
+        <div class="answer-card">
+          <h2>Preparación de superficie</h2>
+          <span class="tag">Paso clave</span><span class="tag">No omitir</span>
+          <p>Antes de aplicar, la superficie debe estar limpia, firme y seca.</p>
+          <ul>
+            <li>Retira polvo, tierra, partes sueltas, grasa o impermeabilizante mal adherido.</li>
+            <li>Lava en húmedo. Si hay hongo, usa hidrolavadora o cepillo de plástico de cerdas duras.</li>
+            <li>Después del lavado, espera mínimo 24 horas de secado para que evapore la humedad.</li>
+            <li>Aplica sellador de porosidad Murtex/Zynera antes del impermeabilizante.</li>
+          </ul>
+          <p><strong>No apliques sobre superficie húmeda, polvosa o con hongo activo.</strong></p>
+        </div>`,
+      aplicacion: `
+        <div class="answer-card">
+          <h2>Aplicación correcta</h2>
+          <p>Una vez limpia, seca y sellada la superficie:</p>
+          <ul>
+            <li>Mezcla el producto antes de usar.</li>
+            <li>Aplica la primera mano de manera uniforme con rodillo, brocha o cepillo.</li>
+            <li>Respeta el tiempo de secado antes de aplicar la segunda mano.</li>
+            <li>Aplica la segunda mano en sentido cruzado para mejorar cobertura.</li>
+            <li>Refuerza puntos críticos como grietas, uniones, bajantes, pretiles y esquinas.</li>
+          </ul>
+        </div>`,
+      secado: `
+        <div class="answer-card">
+          <h2>Tiempo de secado</h2>
+          <p>El secado puede variar por clima, ventilación, humedad y espesor aplicado.</p>
+          <ul>
+            <li><strong>Al tacto:</strong> aproximadamente 2 a 4 horas.</li>
+            <li><strong>Entre manos:</strong> esperar a que la primera mano esté seca.</li>
+            <li><strong>Secado completo:</strong> dejar curar adecuadamente antes de exposición intensa.</li>
+          </ul>
+          <p>Evita aplicar si hay pronóstico de lluvia o si la superficie está caliente en exceso.</p>
+        </div>`,
+      rendimiento: `
+        <div class="answer-card">
+          <h2>Calcular rendimiento</h2>
+          <p>Ingresa los metros cuadrados aproximados de tu superficie:</p>
+          <div class="calc">
+            <input id="sqm" type="number" min="1" placeholder="Ej. 40" />
+            <button class="primary" onclick="calculate()">Calcular</button>
+          </div>
+          <div id="calcResult" class="result">Resultado pendiente.</div>
+          <p><small>Nota: el rendimiento cambia según porosidad, textura, preparación y espesor aplicado. Este cálculo es estimado.</small></p>
+        </div>`,
+      problemas: `
+        <div class="answer-card">
+          <h2>Problemas frecuentes</h2>
+          <h3>Se desprende o se levanta</h3>
+          <p>Normalmente ocurre por polvo, humedad atrapada, superficie mal lavada o falta de sellador.</p>
+          <h3>No cubre como esperaba</h3>
+          <p>Puede deberse a alta porosidad, superficie rugosa o aplicación muy delgada.</p>
+          <h3>Aparece hongo</h3>
+          <p>Debe eliminarse antes de aplicar. No basta con cubrirlo.</p>
+          <h3>Hay grietas</h3>
+          <p>Las grietas deben tratarse antes de impermeabilizar. En puntos críticos conviene reforzar.</p>
+        </div>`,
+      seguridad: `
+        <div class="answer-card">
+          <h2>Precauciones</h2>
+          <ul>
+            <li>Mantén fuera del alcance de niños y mascotas.</li>
+            <li>Evita contacto prolongado con ojos y piel.</li>
+            <li>Usa guantes y protección ocular si la aplicación será prolongada.</li>
+            <li>No ingieras el producto.</li>
+            <li>Mantén el envase cerrado cuando no esté en uso.</li>
+            <li>Desecha el envase conforme a las disposiciones locales.</li>
+          </ul>
+        </div>`,
+      resumen: `
+        <div class="answer-card">
+          <h2>Resumen rápido</h2>
+          <ol>
+            <li>Lava la superficie.</li>
+            <li>Elimina hongo, polvo, grasa y partes sueltas.</li>
+            <li>Espera mínimo 24 horas después del lavado.</li>
+            <li>Aplica sellador de porosidad Murtex/Zynera.</li>
+            <li>Aplica primera mano de Imper “La Cassita”.</li>
+            <li>Deja secar.</li>
+            <li>Aplica segunda mano en sentido cruzado.</li>
+          </ol>
+          <p><strong>La preparación es más importante que la aplicación.</strong></p>
+        </div>`
+    };
+
+    function showAnswer(key){
+      document.getElementById('answer').innerHTML = data[key];
+      document.getElementById('answer').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function calculate(){
+      const sqm = Number(document.getElementById('sqm').value);
+      const result = document.getElementById('calcResult');
+      if(!sqm || sqm <= 0){
+        result.innerHTML = 'Ingresa una cantidad válida de metros cuadrados.';
+        return;
+      }
+      const low = Math.ceil(sqm / 18); // supuesto conservador para 2 manos por cubeta 19L
+      const high = Math.ceil(sqm / 14);
+      result.innerHTML = `Para ${sqm} m², estima entre <strong>${low}</strong> y <strong>${high}</strong> cubeta(s) de 19 L para aplicación a dos manos, según porosidad y textura.`;
+    }
+
+    function contactWhatsApp(){
+      const phone = '5213312345678';
+      const text = encodeURIComponent('Hola, compré Imper La Cassita y necesito ayuda con la aplicación.');
+      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    }
+
+    showAnswer('resumen');
+  </script>
+</body>
+</html>
